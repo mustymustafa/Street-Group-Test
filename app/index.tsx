@@ -1,11 +1,12 @@
+import { useRouter } from 'expo-router';
 import { useBankHolidaysQuery } from '@/src/hooks/useBankHolidaysQuery';
-import { Layout, Card, Text } from '@/src/design-system/components';
+import { Layout, Text } from '@/src/design-system/components';
+import { HolidayListItem } from '@/src/components/HolidayListItem';
 import { FlatList, View } from 'react-native';
-import type { BankHoliday } from '@/src/types';
-import { styles, itemStyles } from '@/app/styles/bankHolidayList.styles';
+import { styles } from '@/app/styles/bankHolidayList.styles';
 
 export default function BankHolidayListScreen() {
-
+  const router = useRouter();
   const { data, isLoading, error } = useBankHolidaysQuery();
 
   return (
@@ -35,27 +36,12 @@ export default function BankHolidayListScreen() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
-          renderItem={({ item }) => <HolidayListItem holiday={item} />}
+          renderItem={({ item }) => (
+            <HolidayListItem holiday={item} onPress={() => router.push(`/edit/${item.id}`)} />
+          )}
         />
       )}
     </Layout>
-  );
-}
-
-interface HolidayListItemProps {
-  holiday: BankHoliday;
-}
-
-function HolidayListItem({ holiday }: HolidayListItemProps) {
-  return (
-    <Card>
-      <Text variant="headingMd" style={itemStyles.title}>
-        {holiday.title}
-      </Text>
-      <Text variant="body" tone="secondary" style={itemStyles.meta}>
-        {holiday.date} • {holiday.regions.join(', ')}
-      </Text>
-    </Card>
   );
 }
 

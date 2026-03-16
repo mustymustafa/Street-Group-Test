@@ -19,8 +19,12 @@ export default function RootLayout() {
         <Stack.Screen
           name="edit/[id]"
           options={{
+            headerBackVisible: true,
+            headerBackTitle: 'Back',
+            headerTitle: '',
       
-            headerShown: false,
+          
+            
           }}
         />
       </Stack>

@@ -8,14 +8,10 @@ export const styles = StyleSheet.create({
   subtitle: {
     marginBottom: spacing.lg,
   },
-  stateContainer: {
-    paddingVertical: spacing.lg,
+  form: {
+    marginTop: spacing.md,
   },
-  listContent: {
-    paddingBottom: spacing.lg,
-  },
-  separator: {
-    height: spacing.sm,
+  actions: {
+    marginVertical: spacing.sm,
   },
 });
-
