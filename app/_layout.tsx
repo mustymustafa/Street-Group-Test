@@ -12,13 +12,15 @@ export default function RootLayout() {
         <Stack.Screen
           name="index"
           options={{
-            title: 'Bank holidays',
+            
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="edit/[id]"
           options={{
-            title: 'Edit holiday',
+      
+            headerShown: false,
           }}
         />
       </Stack>

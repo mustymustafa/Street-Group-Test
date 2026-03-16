@@ -1,38 +1,61 @@
 import { useBankHolidaysQuery } from '@/src/hooks/useBankHolidaysQuery';
-import { View, Text, StyleSheet } from 'react-native';
+import { Layout, Card, Text } from '@/src/design-system/components';
+import { FlatList, View } from 'react-native';
+import type { BankHoliday } from '@/src/types';
+import { styles, itemStyles } from '@/app/styles/bankHolidayList.styles';
 
 export default function BankHolidayListScreen() {
 
   const { data, isLoading, error } = useBankHolidaysQuery();
 
-  //verify data is loaded
-  
-  //console.log("bank holidays", data);
-
-  //TODO: Add loading skeleton when loading
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Bank holidays</Text>
-      <Text style={styles.subtitle}>List screen placeholder</Text>
-    </View>
+    <Layout scroll={false}>
+      <Text variant="headingLg" style={styles.heading}>
+        Bank holidays
+      </Text>
+      <Text variant="body" tone="secondary" style={styles.subtitle}>
+        Next 5 UK bank holidays in the next 6 months.
+      </Text>
+
+      {isLoading && (
+        <View style={styles.stateContainer}>
+          <Text tone="secondary">Loading bank holidays…</Text>
+        </View>
+      )}
+
+      {error && !isLoading && (
+        <View style={styles.stateContainer}>
+          <Text tone="danger">Unable to load bank holidays. Pull to refresh later.</Text>
+        </View>
+      )}
+
+      {data && !isLoading && !error && (
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.listContent}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          renderItem={({ item }) => <HolidayListItem holiday={item} />}
+        />
+      )}
+    </Layout>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 24,
-    paddingTop: 24,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666666',
-  },
-});
+interface HolidayListItemProps {
+  holiday: BankHoliday;
+}
+
+function HolidayListItem({ holiday }: HolidayListItemProps) {
+  return (
+    <Card>
+      <Text variant="headingMd" style={itemStyles.title}>
+        {holiday.title}
+      </Text>
+      <Text variant="body" tone="secondary" style={itemStyles.meta}>
+        {holiday.date} • {holiday.regions.join(', ')}
+      </Text>
+    </Card>
+  );
+}
 
