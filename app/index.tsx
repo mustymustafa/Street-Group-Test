@@ -1,6 +1,15 @@
+import { useBankHolidaysQuery } from '@/src/hooks/useBankHolidaysQuery';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function BankHolidayListScreen() {
+
+  const { data, isLoading, error } = useBankHolidaysQuery();
+
+  //verify data is loaded
+  
+  //console.log("bank holidays", data);
+
+  //TODO: Add loading skeleton when loading
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bank holidays</Text>
