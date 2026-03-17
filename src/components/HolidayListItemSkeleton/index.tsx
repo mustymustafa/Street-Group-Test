@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 
 //THIS Animated component was created by AI
-//This is one way i use AI, to create components and  animations quickly and efficiently
+//This is one way i use AI, to create components and  animations quickly and efficiently ;)
 // AI is great when used for components that do not contain business logic for safety reasons!!
 
 export function HolidayListItemSkeleton() {

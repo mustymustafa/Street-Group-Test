@@ -21,5 +21,9 @@ export const styles = StyleSheet.create({
   separator: {
     height: spacing.md,
   },
+  swipeoutText: {
+    textAlign: 'right',
+    padding: spacing.sm,
+  },
 });
 
