@@ -25,6 +25,7 @@ export default function BankHolidayListScreen() {
     );
   };
 
+  //TODO: if i had time, i would like to check if a holiday is in our calendar on mount and update the list accordingly
   return (
     <Layout scroll={false}>
       <Text variant="headingLg" style={styles.heading}>
