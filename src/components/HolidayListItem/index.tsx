@@ -1,6 +1,7 @@
-import { Pressable } from 'react-native';
-import { Card, Text } from '@/src/design-system/components';
+import { Pressable, View } from 'react-native';
+import { Card, Text, Button } from '@/src/design-system/components';
 import type { BankHoliday } from '@/src/types';
+import { useCalendar } from '@/src/hooks/useCalendar';
 import { styles } from './styles';
 
 export interface HolidayListItemProps {
@@ -9,17 +10,32 @@ export interface HolidayListItemProps {
 }
 
 export function HolidayListItem({ holiday, onPress }: HolidayListItemProps) {
+  const { addHolidayToCalendar } = useCalendar();
+
+  const handleAddToCalendar = async () => {
+    await addHolidayToCalendar(holiday);
+  };
+
   return (
-    <Pressable onPress={onPress}>
-      <Card>
+    <Card>
+      <Pressable onPress={onPress}>
         <Text variant="headingMd" style={styles.title}>
           {holiday.title}
         </Text>
         <Text variant="body" tone="secondary" style={styles.meta}>
           {holiday.date} • {holiday.regions.join(', ')}
         </Text>
-      </Card>
-    </Pressable>
+      </Pressable>
+
+      <View style={styles.actionsRow}>
+        <Button
+          variant="secondary"
+          label="Add to calendar"
+          onPress={handleAddToCalendar}
+          leftIcon={<Text variant="body">📅</Text>}
+        />
+      </View>
+    </Card>
   );
 }
 

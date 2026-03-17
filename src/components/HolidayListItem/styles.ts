@@ -9,5 +9,8 @@ export const styles = StyleSheet.create({
   meta: {
     color: colors.textSecondary,
   },
+  actionsRow: {
+    marginTop: spacing.sm,
+  },
 });
 
