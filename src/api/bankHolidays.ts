@@ -4,6 +4,8 @@ import { mergeAndDedupe, filterUpcomingNextFive } from '@/src/utils/bankHolidayU
 // in a production app, this would be in a .env file
 const BANK_HOLIDAYS_URL = 'https://www.gov.uk/bank-holidays.json';
 
+//TODO: if i had time, i would implement a Global Error Handler to handle errors from the API and display a user-friendly message
+
 export const fetchBankHolidays = async (): Promise<BankHoliday[]> => {
   // Deliberate delay to make loading skeletons visible for demo purposes
   await new Promise((resolve) => setTimeout(resolve, 5000));
