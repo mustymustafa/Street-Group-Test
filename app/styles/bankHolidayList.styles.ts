@@ -11,11 +11,15 @@ export const styles = StyleSheet.create({
   stateContainer: {
     paddingVertical: spacing.lg,
   },
+  skeletonContainer: {
+    paddingVertical: spacing.lg,
+    gap: spacing.sm,
+  },
   listContent: {
     paddingBottom: 80,
   },
   separator: {
-height: spacing.md
+    height: spacing.md,
   },
 });
 

@@ -8,6 +8,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     padding: spacing.md,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.borderSubtle,
+    borderColor: colors.primary,
   },
 });

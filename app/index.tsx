@@ -2,12 +2,14 @@ import { useRouter } from 'expo-router';
 import { useBankHolidaysQuery } from '@/src/hooks/useBankHolidaysQuery';
 import { Layout, Text } from '@/src/design-system/components';
 import { HolidayListItem } from '@/src/components/HolidayListItem';
+import { HolidayListItemSkeleton } from '@/src/components/HolidayListItemSkeleton';
 import { FlatList, View } from 'react-native';
 import { styles } from '@/app/styles/bankHolidayList.styles';
 
 export default function BankHolidayListScreen() {
   const router = useRouter();
-  const { data, isLoading, error } = useBankHolidaysQuery();
+  const { data, isLoading, error, refetch, isRefetching } = useBankHolidaysQuery();
+  const isInitialLoading = isLoading && !data;
 
   return (
     <Layout scroll={false}>
@@ -18,9 +20,13 @@ export default function BankHolidayListScreen() {
         Next 5 UK bank holidays in the next 6 months.
       </Text>
 
-      {isLoading && (
+      {isInitialLoading && (
         <View style={styles.stateContainer}>
-          <Text tone="secondary">Loading bank holidays…</Text>
+          <View style={styles.skeletonContainer}>
+            {[1, 2, 3].map((key) => (
+              <HolidayListItemSkeleton key={key} />
+            ))}
+          </View>
         </View>
       )}
 
@@ -32,7 +38,9 @@ export default function BankHolidayListScreen() {
 
       {data && !isLoading && !error && (
         <FlatList
-        showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          refreshing={isRefetching}
+          onRefresh={refetch}
           data={data}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
