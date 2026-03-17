@@ -14,11 +14,11 @@ A mobile app that displays the next 5 upcoming UK bank holidays within the next 
 ### Setup
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 
-Scan the QR code with Expo Go (iOS/Android) or press `i` / `a` to open in a simulator.
+Scan the QR code with Expo Go (iOS/Android) or press `i` (for ios simulator) / `a` (for android simulator) to open in a simulator.
 
 ### Tests
 

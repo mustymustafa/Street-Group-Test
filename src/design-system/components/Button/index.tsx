@@ -52,9 +52,7 @@ export function Button({
           styles.label,
           {
             color:
-              variant === 'primary' || variant === 'secondary'
-                ? colors.background
-                : colors.textPrimary,
+              disabled ? colors.textPrimary : colors.background,
           },
         ]}
       >
