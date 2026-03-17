@@ -1,7 +1,9 @@
-import { Pressable, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, Pressable, View } from 'react-native';
 import { Card, Text, Button } from '@/src/design-system/components';
 import type { BankHoliday } from '@/src/types';
 import { useCalendar } from '@/src/hooks/useCalendar';
+import { formatDisplayDate } from '@/src/utils/dateUtils';
 import { styles } from './styles';
 
 export interface HolidayListItemProps {
@@ -11,9 +13,19 @@ export interface HolidayListItemProps {
 
 export function HolidayListItem({ holiday, onPress }: HolidayListItemProps) {
   const { addHolidayToCalendar } = useCalendar();
+  const [isInCalendar, setIsInCalendar] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
+  //TODO if i had time: navigate to calendar app after holiday is added to calendar
   const handleAddToCalendar = async () => {
-    await addHolidayToCalendar(holiday);
+    if (isInCalendar || isAdding) return;
+    setIsAdding(true);
+    const result = await addHolidayToCalendar(holiday);
+    if (result.ok) {
+      setIsInCalendar(true);
+      Alert.alert('Added to calendar', 'This bank holiday has been added to your calendar.');
+    }
+    setIsAdding(false);
   };
 
   return (
@@ -23,17 +35,27 @@ export function HolidayListItem({ holiday, onPress }: HolidayListItemProps) {
           {holiday.title}
         </Text>
         <Text variant="body" tone="secondary" style={styles.meta}>
-          {holiday.date} • {holiday.regions.join(', ')}
+          {formatDisplayDate(holiday.date)}
+        </Text>
+        <Text variant="body" tone="secondary" style={styles.regions}>
+          {holiday.regions.join(', ')}
         </Text>
       </Pressable>
 
       <View style={styles.actionsRow}>
-        <Button
-          variant="secondary"
-          label="Add to calendar"
-          onPress={handleAddToCalendar}
-          leftIcon={<Text variant="body">📅</Text>}
-        />
+        {isInCalendar ? (
+          <Text variant="body" tone="primary">
+            ✅ Added to calendar
+          </Text>
+        ) : (
+          <Button
+            variant="secondary"
+            label={isAdding ? 'Adding…' : 'Add to calendar'}
+            onPress={handleAddToCalendar}
+            disabled={isAdding}
+            leftIcon={<Text variant="body"> 📅 </Text>}
+          />
+        )}
       </View>
     </Card>
   );

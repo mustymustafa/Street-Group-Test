@@ -9,6 +9,10 @@ export const styles = StyleSheet.create({
   meta: {
     color: colors.textSecondary,
   },
+  regions: {
+    color: colors.textSecondary,
+    marginTop: 2,
+  },
   actionsRow: {
     marginTop: spacing.sm,
   },

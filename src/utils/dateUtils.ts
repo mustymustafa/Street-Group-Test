@@ -25,3 +25,17 @@ export const compareIsoDatesAsc = (a: string, b: string): number => {
   return parseIsoDate(a).getTime() - parseIsoDate(b).getTime();
 };
 
+export const formatDisplayDate = (iso: string): string => {
+  const date = parseIsoDate(iso);
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  const base = formatter.format(date); // e.g. "24 Apr 2026"
+  // Insert a period after the abbreviated month to match "Apr. 24, 2026"
+  const withComma = base.replace(/(\d{1,2}) (\w{3}) (\d{4})/, '$2. $1, $3');
+  return withComma;
+};
+
+

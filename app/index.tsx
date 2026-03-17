@@ -32,6 +32,7 @@ export default function BankHolidayListScreen() {
 
       {data && !isLoading && !error && (
         <FlatList
+        showsVerticalScrollIndicator={false}
           data={data}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}

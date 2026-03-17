@@ -12,10 +12,10 @@ export const styles = StyleSheet.create({
     paddingVertical: spacing.lg,
   },
   listContent: {
-    paddingBottom: spacing.lg,
+    paddingBottom: 80,
   },
   separator: {
-    height: spacing.sm,
+height: spacing.md
   },
 });
 
