@@ -24,6 +24,8 @@ export default function EditHolidayScreen() {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [pickerDate, setPickerDate] = useState<Date | null>(null);
 
+//A nice to have i would add if i had time was to make the edit more robust. updating a title or date of a holiday i already added in my calendar should update my native calendar also!
+
   useEffect(() => {
     if (holiday) {
       setTitle(holiday.title);
