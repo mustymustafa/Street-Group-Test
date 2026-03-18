@@ -36,7 +36,7 @@ npm test
 - Displays the next 5 holidays within 6 months
 - Edit holiday title and date with validation
 ## Bonus features
-- Swipe left to delete a holiday
+- Swipe left to delete a holiday (I used my own published package for this! https://www.npmjs.com/package/react-native-swipeout-component)
 - Offline support — cached data is shown when there is no network
 - Pull to refresh
 - Skeleton loading state (Subtle animations )
